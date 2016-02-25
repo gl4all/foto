@@ -1,0 +1,52 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<style>
+     img {
+      -o-fit-object: cover;
+      height: 400px;
+      width: 300px
+      background: #020509;
+    }
+  </style>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>This is a Heading</h1>
+<p id = 'gr'>This is a paragraph.</p>
+<input id='file-input' type='file' multiple>
+<br>
+<button>Send all to server</button>
+<script>
+
+  var fileInput = document.getElementById('file-input');
+  fileInput.addEventListener('change', function(event) {
+    var input = event.target;
+
+    for (var i = 0; i < input.files.length; i++) {
+     /* console.log(input.files[i].name+input.files[i].size);*/
+	    var file = input.files[i];
+	    fr = new FileReader();
+	    fr.name = file.name;
+	    p1=document.createElement("p");
+	    p=document.createElement("p");
+	    p.id=file.name;
+	    p1.innerHTML="<br>"+file.name+':'+file.size;
+	    el=document.getElementById('gr');
+	    el.appendChild(p1);
+       	    el.appendChild(p);
+	    fr.onload =function (){
+		    var result  =this.result; 
+	el = document.getElementById(this.name); 
+	img=document.createElement('img');
+	img.src = result;
+	el.appendChild(img);
+	};
+
+    fr.readAsDataURL(file);
+    }
+  });
+</script>
+</body>
+</html> 
